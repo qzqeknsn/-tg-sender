@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Telegram Sender Pro</title>
+    <link rel="stylesheet" href="./assets/index-CNrvukqR.css"/>
+    <script src="./api-bridge.js" defer></script>
+    <script type="module" src="./assets/demo-app.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <dialog id="codeDialog" style="width:380px;padding:0;border:none;border-radius:16px;background:#151e2a;color:#fff;box-shadow:0 8px 40px rgba(0,0,0,.5)">
+      <div style="padding:24px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <h3 style="margin:0;font-size:18px" id="codeDialogTitle">Подтверждение</h3>
+          <button type="button" onclick="window._closeCodeDialog()" style="width:32px;height:32px;border-radius:8px;background:0 0;border:none;color:#8896ab;cursor:pointer;font-size:18px">&#10005;</button>
+        </div>
+        <p style="font-size:13px;color:#8896ab;margin:0 0 16px;text-align:center" id="codeDialogDesc">Введите код из Telegram</p>
+
+        <div id="codeBoxes" style="display:flex;gap:8px;justify-content:center;margin-bottom:20px">
+          <input type="text" maxlength="1" class="code-digit" data-idx="0"
+            style="width:48px;height:56px;background:#0f1419;border:2px solid #232d3d;border-radius:12px;color:#fff;font-size:22px;text-align:center;outline:none;caret-color:#3b82f6;transition:border-color .2s">
+          <input type="text" maxlength="1" class="code-digit" data-idx="1"
+            style="width:48px;height:56px;background:#0f1419;border:2px solid #232d3d;border-radius:12px;color:#fff;font-size:22px;text-align:center;outline:none;caret-color:#3b82f6;transition:border-color .2s">
+          <input type="text" maxlength="1" class="code-digit" data-idx="2"
+            style="width:48px;height:56px;background:#0f1419;border:2px solid #232d3d;border-radius:12px;color:#fff;font-size:22px;text-align:center;outline:none;caret-color:#3b82f6;transition:border-color .2s">
+          <input type="text" maxlength="1" class="code-digit" data-idx="3"
+            style="width:48px;height:56px;background:#0f1419;border:2px solid #232d3d;border-radius:12px;color:#fff;font-size:22px;text-align:center;outline:none;caret-color:#3b82f6;transition:border-color .2s">
+          <input type="text" maxlength="1" class="code-digit" data-idx="4"
+            style="width:48px;height:56px;background:#0f1419;border:2px solid #232d3d;border-radius:12px;color:#fff;font-size:22px;text-align:center;outline:none;caret-color:#3b82f6;transition:border-color .2s">
+        </div>
+
+        <div id="codeSuccess" style="display:none;text-align:center;margin-bottom:16px">
+          <div style="width:56px;height:56px;border-radius:50%;background:#22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto;font-size:28px;color:#fff">&#10003;</div>
+          <p style="color:#22c55e;font-size:14px;margin:8px 0 0">Аккаунт подключён!</p>
+        </div>
+
+        <input type="password" id="passInput" placeholder="Пароль 2FA (если есть)"
+          style="display:none;width:100%;height:40px;background:#0f1419;border:1px solid #232d3d;border-radius:8px;padding:0 12px;color:#fff;font-size:14px;box-sizing:border-box;outline:0;margin-bottom:12px">
+
+        <div id="codeError" style="display:none;color:#ef4444;font-size:13px;margin-bottom:12px;text-align:center"></div>
+
+        <button id="codeSubmitBtn" onclick="window._submitCode()"
+          style="width:100%;height:40px;border-radius:8px;background:#3b82f6;border:none;color:#fff;font-size:14px;font-weight:500;cursor:pointer;display:none">Подтвердить</button>
+
+        <button id="resendBtn" onclick="window._resendCode()"
+          style="width:100%;height:36px;border-radius:8px;background:0 0;border:1px solid #232d3d;color:#8896ab;font-size:13px;cursor:pointer;margin-top:8px;transition:color .2s"
+          onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#8896ab'">Отправить код ещё раз</button>
+      </div>
+    </dialog>
+</body>
+</html>

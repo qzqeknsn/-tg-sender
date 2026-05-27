@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Telegram Sender Pro — Вход</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0b0e13;
+      color: #f0f4f8;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh;
+      padding: 16px;
+    }
+    .card {
+      background: #151e2a;
+      border: 1px solid #232d3d;
+      border-radius: 16px;
+      padding: 40px 32px;
+      width: 400px;
+      max-width: 100%;
+    }
+    .logo {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, #3b82f6, #06b6d4);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 24px;
+    }
+    h1 { text-align: center; font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .subtitle { text-align: center; color: #8896ab; font-size: 14px; margin-bottom: 28px; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 13px; font-weight: 500; color: #c0ccdc; margin-bottom: 6px; text-align: center; }
+    input[type="tel"] {
+      width: 100%; height: 44px;
+      background: #0f1419;
+      border: 1px solid #232d3d;
+      border-radius: 10px;
+      padding: 0 14px;
+      color: #f0f4f8;
+      font-size: 15px;
+      outline: none;
+      transition: border-color .2s;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    input[type="tel"]:focus { border-color: #3b82f6; }
+    input[type="tel"]::placeholder { color: #556478; }
+    .hint { text-align: center; color: #556478; font-size: 12px; margin-top: 6px; }
+
+    /* Code boxes */
+    .code-boxes {
+      display: flex; gap: 8px; justify-content: center; margin-bottom: 20px;
+    }
+    .code-box {
+      width: 48px; height: 56px;
+      background: #0f1419;
+      border: 2px solid #232d3d;
+      border-radius: 12px;
+      color: #f0f4f8;
+      font-size: 22px; font-weight: 600;
+      text-align: center;
+      outline: none;
+      caret-color: #3b82f6;
+      transition: border-color .2s;
+    }
+    .code-box:focus { border-color: #3b82f6; }
+    .code-box.filled { border-color: #3b82f6; }
+    .code-box.shake { animation: shake .4s ease; }
+
+    @keyframes shake {
+      0%,100% { transform: translateX(0) }
+      20% { transform: translateX(-6px) }
+      40% { transform: translateX(6px) }
+      60% { transform: translateX(-4px) }
+      80% { transform: translateX(4px) }
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+    .footer { margin-top: 24px; padding-top: 16px; border-top: 1px solid #232d3d; }
+    .qr-section {
+      display: flex; align-items: center; gap: 12px;
+      padding: 8px 10px; border-radius: 8px;
+      cursor: default; transition: background .2s;
+    }
+    .qr-section:hover { background: #1a2533; }
+    .qr-placeholder {
+      width: 36px; height: 36px;
+      background: rgba(59,130,246,.08); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .qr-info { flex: 1; }
+    .qr-label { color: #8896ab; font-size: 13px; font-weight: 500; margin-bottom: 2px; }
+    .qr-desc { color: #556478; font-size: 11px; }
+
+    .btn {
+      width: 100%; height: 44px;
+      border: none; border-radius: 10px;
+      font-size: 15px; font-weight: 600;
+      cursor: pointer;
+      transition: opacity .2s, transform .1s, background .2s;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-primary {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      color: #fff;
+    }
+    .btn-primary:hover { opacity: .9; }
+    .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #232d3d;
+      color: #8896ab;
+    }
+    .btn-outline:hover { background: #232d3d; color: #f0f4f8; }
+    .btn-outline:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-outline:disabled:hover { background: transparent; color: #8896ab; }
+
+    .error {
+      color: #ef4444; font-size: 13px; margin-top: 12px;
+      display: none; text-align: center;
+      padding: 8px 12px; background: rgba(239,68,68,.08);
+      border-radius: 8px; border: 1px solid rgba(239,68,68,.15);
+    }
+    .info {
+      text-align: center; color: #8896ab; font-size: 14px;
+      padding: 24px 0;
+    }
+    .info .spin {
+      display: inline-block; width: 24px; height: 24px;
+      border: 2px solid #232d3d; border-top-color: #3b82f6;
+      border-radius: 50%; animation: spin .6s linear infinite;
+      margin-bottom: 12px;
+    }
+    .step-indicator { display: flex; justify-content: center; gap: 8px; margin-bottom: 24px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #232d3d; transition: background .3s; }
+    .dot.active { background: #3b82f6; }
+    .dot.done { background: #22c55e; }
+    .step { display: none; animation: fadeIn .25s ease; }
+    .step.active { display: block; }
+
+    .back-link {
+      display: block; text-align: center; margin-top: 16px;
+      color: #556478; font-size: 13px; cursor: pointer;
+      text-decoration: none;
+    }
+    .back-link:hover { color: #8896ab; }
+    .phone-display {
+      text-align: center; font-size: 15px; font-weight: 500;
+      color: #c0ccdc; margin-bottom: 16px;
+      padding: 8px; background: #0f1419; border-radius: 8px;
+    }
+    .success-screen {
+      display: none; text-align: center; padding: 30px 0;
+    }
+    .success-screen .check {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #22c55e; display: flex; align-items: center;
+      justify-content: center; margin: 0 auto 16px; font-size: 28px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">&#9992;&#65039;</div>
+    <h1>Telegram Sender Pro</h1>
+    <p class="subtitle">Войдите через Telegram</p>
+
+    <div class="step-indicator">
+      <div class="dot active" id="dot1"></div>
+      <div class="dot" id="dot2"></div>
+    </div>
+
+    <!-- Step 1: Phone -->
+    <div class="step active" id="step1">
+      <div class="form-group">
+        <label for="phone">Номер телефона</label>
+        <input type="tel" id="phone" placeholder="+7 999 123 45 67"
+          autocomplete="tel" inputmode="tel"
+          onkeydown="if(event.key==='Enter') sendCode()"/>
+        <p class="hint">Укажите номер, который есть в Telegram</p>
+      </div>
+      <button class="btn btn-primary" id="sendCodeBtn" onclick="sendCode()">
+        Получить код в Telegram
+      </button>
+      <div class="error" id="phoneError"></div>
+    </div>
+
+    <!-- Step 2: Code -->
+    <div class="step" id="step2">
+      <div class="phone-display" id="phoneDisplay"></div>
+
+      <div id="codeLoading" style="display:none">
+        <div class="info"><div class="spin"></div><p>Проверяем код...</p></div>
+      </div>
+
+      <div id="codeForm">
+        <label>Введите код из Telegram</label>
+        <div class="code-boxes" id="codeBoxes">
+          <input type="text" maxlength="1" class="code-box" data-idx="0" inputmode="numeric" autocomplete="off">
+          <input type="text" maxlength="1" class="code-box" data-idx="1" inputmode="numeric" autocomplete="off">
+          <input type="text" maxlength="1" class="code-box" data-idx="2" inputmode="numeric" autocomplete="off">
+          <input type="text" maxlength="1" class="code-box" data-idx="3" inputmode="numeric" autocomplete="off">
+          <input type="text" maxlength="1" class="code-box" data-idx="4" inputmode="numeric" autocomplete="off">
+        </div>
+
+        <div id="passwordGroup" style="display:none">
+          <input type="password" id="passwordInput"
+            placeholder="Пароль двухфакторной аутентификации"
+            style="width:100%;height:44px;background:#0f1419;border:1px solid #232d3d;border-radius:10px;padding:0 14px;color:#f0f4f8;font-size:14px;outline:none;margin-bottom:12px;text-align:center"
+            onkeydown="if(event.key==='Enter' && this.value) submitCode()"/>
+        </div>
+
+        <div class="error" id="codeError"></div>
+
+        <button class="btn btn-outline" id="resendBtn" style="margin-top:4px" onclick="resendCode()" disabled>
+          Отправить снова через 30с
+        </button>
+      </div>
+    </div>
+
+    <!-- Success overlay -->
+    <div class="success-screen" id="successScreen">
+      <div class="check">&#10003;</div>
+      <p style="color:#22c55e;font-size:16px;font-weight:500">Успешный вход!</p>
+    </div>
+  </div>
+
+    <div class="footer">
+      <div class="qr-section">
+        <div class="qr-placeholder">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <line x1="16" y1="14" x2="16" y2="14.01"/>
+            <line x1="14" y1="18" x2="19" y2="18"/>
+            <line x1="14" y1="21" x2="18" y2="18"/>
+            <line x1="19" y1="18" x2="21" y2="21"/>
+            <line x1="18" y1="21" x2="18" y2="15"/>
+            <line x1="21" y1="15" x2="21" y2="21"/>
+          </svg>
+        </div>
+        <div class="qr-info">
+          <p class="qr-label">Вход по QR-коду</p>
+          <p class="qr-desc">Скоро — отсканируйте код в Telegram</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var API_BASE = window.location.origin;
+    var _phone = '';
+    var _authInProgress = false;
+    var _resendTimer = null;
+    var _resendCooldown = 0;
+
+    // --- Code boxes logic ---
+
+    function setupCodeBoxes() {
+      var boxes = document.querySelectorAll('.code-box');
+      for (var i = 0; i < boxes.length; i++) {
+        boxes[i].addEventListener('input', function(e) {
+          var box = e.target;
+          var val = box.value.replace(/\D/g, '');
+          box.value = val.slice(0, 1);
+          box.classList.toggle('filled', !!val);
+          var idx = parseInt(box.getAttribute('data-idx'));
+          if (val && idx < 4) {
+            document.querySelector('.code-box[data-idx="' + (idx + 1) + '"]').focus();
+          }
+          checkCodeComplete();
+        });
+        boxes[i].addEventListener('keydown', function(e) {
+          if (e.key === 'Backspace') {
+            var box = e.target;
+            var idx = parseInt(box.getAttribute('data-idx'));
+            if (!box.value && idx > 0) {
+              document.querySelector('.code-box[data-idx="' + (idx - 1) + '"]').focus();
+            }
+          }
+        });
+        boxes[i].addEventListener('focus', function() {
+          this.select();
+        });
+      }
+    }
+
+    function getCode() {
+      var code = '';
+      var boxes = document.querySelectorAll('.code-box');
+      for (var i = 0; i < boxes.length; i++) {
+        code += boxes[i].value || '';
+      }
+      return code;
+    }
+
+    function clearCode() {
+      var boxes = document.querySelectorAll('.code-box');
+      for (var i = 0; i < boxes.length; i++) {
+        boxes[i].value = '';
+        boxes[i].classList.remove('filled');
+      }
+      document.querySelector('.code-box[data-idx="0"]').focus();
+    }
+
+    function shakeCodeBoxes() {
+      var boxes = document.querySelectorAll('.code-box');
+      for (var i = 0; i < boxes.length; i++) {
+        boxes[i].classList.add('shake');
+        setTimeout(function(b) { b.classList.remove('shake'); }, 400, boxes[i]);
+      }
+    }
+
+    function checkCodeComplete() {
+      var code = getCode();
+      if (code.length === 5 && !_authInProgress) {
+        submitCode();
+      }
+    }
+
+    // --- Resend timer ---
+
+    function startResendTimer() {
+      if (_resendTimer) clearInterval(_resendTimer);
+      _resendCooldown = 30;
+      var btn = document.getElementById('resendBtn');
+      btn.disabled = true;
+      updateResendBtn();
+      _resendTimer = setInterval(function() {
+        _resendCooldown--;
+        if (_resendCooldown <= 0) {
+          clearInterval(_resendTimer);
+          _resendTimer = null;
+          btn.disabled = false;
+          btn.textContent = 'Отправить код снова';
+        } else {
+          updateResendBtn();
+        }
+      }, 1000);
+    }
+
+    function updateResendBtn() {
+      var btn = document.getElementById('resendBtn');
+      btn.textContent = 'Отправить снова через ' + _resendCooldown + 'с';
+    }
+
+    // --- UI helpers ---
+
+    function showError(el, msg) {
+      el.textContent = msg;
+      el.style.display = 'block';
+    }
+
+    function hideError(el) {
+      el.textContent = '';
+      el.style.display = 'none';
+    }
+
+    function goStep(n) {
+      document.querySelectorAll('.step').forEach(function(s) { s.classList.remove('active'); });
+      document.getElementById('step' + n).classList.add('active');
+      document.querySelectorAll('.dot').forEach(function(d) { d.classList.remove('active', 'done'); });
+      for (var i = 1; i <= n; i++) {
+        var dot = document.getElementById('dot' + i);
+        if (i < n) dot.classList.add('done');
+        else dot.classList.add('active');
+      }
+    }
+
+    function normalizePhone(raw) {
+      var digits = raw.replace(/\D/g, '');
+      if (digits.length === 11 && (digits[0] === '7' || digits[0] === '8')) return '+' + digits;
+      if (digits.length === 10) return '+7' + digits;
+      return '+' + digits;
+    }
+
+    function formatPhone(s) {
+      var d = s.replace(/\D/g, '');
+      if (d.length === 12 && d[0] === '7') return '+' + d[0] + ' (' + d.slice(1,4) + ') ' + d.slice(4,7) + ' ' + d.slice(7,9) + ' ' + d.slice(9,11);
+      if (d.length === 11) return '+' + d[0] + ' (' + d.slice(1,4) + ') ' + d.slice(4,7) + ' ' + d.slice(7,9) + ' ' + d.slice(9,11);
+      return s;
+    }
+
+    // --- Main flow ---
+
+    function sendCode() {
+      var input = document.getElementById('phone');
+      var btn = document.getElementById('sendCodeBtn');
+      var errEl = document.getElementById('phoneError');
+      hideError(errEl);
+
+      var raw = input.value.trim();
+      if (!raw) { showError(errEl, 'Введите номер телефона'); input.focus(); return; }
+      var phone = normalizePhone(raw);
+      if (phone.length < 8) { showError(errEl, 'Номер слишком короткий'); input.focus(); return; }
+
+      _phone = phone;
+      btn.disabled = true;
+      btn.textContent = 'Отправка...';
+
+      fetch(API_BASE + '/api/auth/send-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: phone }),
+      }).then(function(r) {
+        if (!r.ok) {
+          return r.json().then(function(d) { throw new Error(d.detail || 'Ошибка отправки'); });
+        }
+        return r.json();
+      }).then(function() {
+        goStep(2);
+        document.getElementById('phoneDisplay').textContent = formatPhone(phone);
+        setupCodeBoxes();
+        setTimeout(function() {
+          document.querySelector('.code-box[data-idx="0"]').focus();
+        }, 100);
+        startResendTimer();
+      }).catch(function(err) {
+        btn.disabled = false;
+        btn.textContent = 'Получить код в Telegram';
+        showError(errEl, err.message);
+      });
+    }
+
+    function submitCode() {
+      if (_authInProgress) return;
+      var code = getCode();
+      if (code.length < 5) return;
+
+      _authInProgress = true;
+      var errEl = document.getElementById('codeError');
+      hideError(errEl);
+
+      document.getElementById('codeForm').style.display = 'none';
+      document.getElementById('codeLoading').style.display = 'block';
+
+      fetch(API_BASE + '/api/auth/confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: _phone, code: code, password: document.getElementById('passwordInput').value.trim() || null }),
+      }).then(function(r) {
+        return r.json().then(function(d) {
+          if (!r.ok) throw new Error(d.detail || 'Ошибка');
+          return d;
+        });
+      }).then(function(data) {
+        if (data.need_password) {
+          _authInProgress = false;
+          document.getElementById('codeLoading').style.display = 'none';
+          document.getElementById('codeForm').style.display = 'block';
+          document.getElementById('passwordGroup').style.display = 'block';
+          document.getElementById('passwordInput').focus();
+          showError(errEl, 'Требуется пароль двухфакторной аутентификации');
+          return;
+        }
+        // Success
+        localStorage.setItem('tg_sender_token', data.token);
+        localStorage.setItem('tg_sender_user', JSON.stringify(data.user));
+        document.getElementById('successScreen').style.display = 'block';
+        document.getElementById('codeForm').style.display = 'none';
+        document.getElementById('codeLoading').style.display = 'none';
+        sessionStorage.setItem('logged_in', '1');
+        setTimeout(function() { window.location.href = '/'; }, 600);
+      }).catch(function(err) {
+        _authInProgress = false;
+        document.getElementById('codeLoading').style.display = 'none';
+        document.getElementById('codeForm').style.display = 'block';
+        shakeCodeBoxes();
+        clearCode();
+        showError(errEl, err.message);
+      });
+    }
+
+    function resendCode() {
+      var errEl = document.getElementById('codeError');
+      hideError(errEl);
+      var btn = document.getElementById('resendBtn');
+      btn.disabled = true;
+      btn.textContent = 'Отправка...';
+
+      fetch(API_BASE + '/api/auth/send-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone: _phone }),
+      }).then(function(r) {
+        if (!r.ok) return r.json().then(function(d) { throw new Error(d.detail || 'Ошибка'); });
+        return r.json();
+      }).then(function() {
+        clearCode();
+        startResendTimer();
+      }).catch(function(err) {
+        btn.disabled = false;
+        btn.textContent = 'Отправить код снова';
+        showError(errEl, err.message);
+      });
+    }
+
+    // Проверка существующего токена — не редиректим, просто показываем уведомление
+    (function() {
+      var token = localStorage.getItem('tg_sender_token');
+      if (!token) return;
+      fetch(API_BASE + '/api/auth/me', {
+        headers: { 'Authorization': 'Bearer ' + token }
+      }).then(function(r) {
+        if (r.ok) {
+          var subtitle = document.querySelector('.subtitle');
+          subtitle.innerHTML = 'Вы уже вошли · <a href="/" style="color:#3b82f6;text-decoration:none">перейти в дашборд</a>';
+        } else {
+          localStorage.removeItem('tg_sender_token');
+          localStorage.removeItem('tg_sender_user');
+        }
+      }).catch(function() {
+        localStorage.removeItem('tg_sender_token');
+        localStorage.removeItem('tg_sender_user');
+      });
+    })();
+  </script>
+</body>
+</html>

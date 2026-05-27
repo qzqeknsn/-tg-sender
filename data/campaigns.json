@@ -1,0 +1,125 @@
+[
+  {
+    "id": "33ec3a42",
+    "name": "Новая рассылка",
+    "status": "completed",
+    "recipientsTotal": 3,
+    "recipientsSent": 3,
+    "recipientsDelivered": 3,
+    "recipientsFailed": 0,
+    "createdAt": "2026-05-27T10:28:41.935178+00:00",
+    "message": "че там когда скинешь {{username}}",
+    "accounts": [
+      "+77754936161"
+    ],
+    "minDelay": 30,
+    "maxDelay": 120,
+    "logs": [
+      {
+        "id": "1",
+        "timestamp": "15:28:42",
+        "type": "info",
+        "message": "Старт: 3 получателей",
+        "account": "+77754936161"
+      },
+      {
+        "id": "2",
+        "timestamp": "15:28:43",
+        "type": "success",
+        "message": "@temirlan006 — доставлено",
+        "account": "+77754936161"
+      },
+      {
+        "id": "3",
+        "timestamp": "15:29:59",
+        "type": "success",
+        "message": "@wrxz7 — доставлено",
+        "account": "+77754936161"
+      },
+      {
+        "id": "4",
+        "timestamp": "15:31:34",
+        "type": "success",
+        "message": "@shinerock — доставлено",
+        "account": "+77754936161"
+      },
+      {
+        "id": "5",
+        "timestamp": "15:31:35",
+        "type": "success",
+        "message": "Итого: 3 доставлено, 0 ошибок",
+        "account": ""
+      }
+    ],
+    "progress": 100,
+    "completedAt": "2026-05-27T10:31:35.004647+00:00"
+  },
+  {
+    "id": "661bf04d",
+    "name": "Новая рассылка",
+    "status": "completed",
+    "recipientsTotal": 1,
+    "recipientsSent": 0,
+    "recipientsDelivered": 0,
+    "recipientsFailed": 0,
+    "createdAt": "2026-05-26T15:51:56.503364+00:00",
+    "message": "Test {{username}} {{date}}",
+    "accounts": [
+      "+77056550632"
+    ],
+    "minDelay": 30,
+    "maxDelay": 120,
+    "logs": [
+      {
+        "id": "1",
+        "timestamp": "20:51:56",
+        "type": "info",
+        "message": "Старт: 1 получателей",
+        "account": "+77056550632"
+      },
+      {
+        "id": "2",
+        "timestamp": "20:51:57",
+        "type": "success",
+        "message": "Итого: 0 доставлено, 0 ошибок",
+        "account": ""
+      }
+    ],
+    "progress": 100,
+    "completedAt": "2026-05-26T15:51:57.287106+00:00"
+  },
+  {
+    "id": "43b8d025",
+    "name": "Тестовый запуск",
+    "status": "completed",
+    "recipientsTotal": 4,
+    "recipientsSent": 0,
+    "recipientsDelivered": 0,
+    "recipientsFailed": 0,
+    "createdAt": "2026-05-26T15:29:07.048356+00:00",
+    "message": "Тест тест {{username}}",
+    "accounts": [
+      "+77056550632"
+    ],
+    "minDelay": 20,
+    "maxDelay": 120,
+    "logs": [
+      {
+        "id": "1",
+        "timestamp": "20:29:07",
+        "type": "info",
+        "message": "Старт: 4 получателей",
+        "account": "+77056550632"
+      },
+      {
+        "id": "2",
+        "timestamp": "20:29:07",
+        "type": "success",
+        "message": "Итого: 0 доставлено, 0 ошибок",
+        "account": ""
+      }
+    ],
+    "progress": 100,
+    "completedAt": "2026-05-26T15:29:07.965393+00:00"
+  }
+]

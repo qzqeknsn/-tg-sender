@@ -1,0 +1,16 @@
+[
+  {
+    "phone": "+77056550632",
+    "tier": 2,
+    "notes": "added via web",
+    "proxy": "",
+    "active": false
+  },
+  {
+    "phone": "+77754936161",
+    "tier": 2,
+    "notes": "added via web",
+    "proxy": "",
+    "active": true
+  }
+]

@@ -1,0 +1,11 @@
+venv/
+.env
+*.session
+*.session-journal
+logs/
+__pycache__/
+*.pyc
+.DS_Store
+.git/
+archive/
+scratch/
