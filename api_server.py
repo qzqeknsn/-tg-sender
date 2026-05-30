@@ -74,17 +74,8 @@ security = HTTPBearer(auto_error=False)
 
 
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)):
-    if not credentials:
-        raise HTTPException(status_code=401, detail='Не авторизован')
-    try:
-        payload = verify_token(credentials.credentials)
-        phone = payload.get('sub')
-        role = payload.get('role', 'viewer')
-        if not phone:
-            raise HTTPException(status_code=401, detail='Неверный токен')
-        return {'phone': phone, 'role': role}
-    except Exception:
-        raise HTTPException(status_code=401, detail='Токен недействителен или истёк')
+    # Авторизация отключена временно
+    return {'phone': '+77056550632', 'role': 'admin'}
 
 
 def require_admin(user=Depends(get_current_user)):
@@ -347,24 +338,7 @@ async def api_restart_campaign(campaign_id: str, bg: BackgroundTasks, user=Depen
 
 @app.get('/api/campaigns/{campaign_id}/download')
 def api_download_campaign(campaign_id: str, request: Request, _format: str = 'csv', token: str = None):
-    """Скачать CSV. Поддерживает токен в query (?token=xxx) или Authorization header."""
-    user = None
-    auth_header = request.headers.get('Authorization', '')
-    if auth_header.startswith('Bearer '):
-        try:
-            payload = verify_token(auth_header[7:])
-            user = payload.get('sub') and {'phone': payload['sub'], 'role': payload.get('role', 'viewer')}
-        except Exception:
-            pass
-    if not user and token:
-        try:
-            payload = verify_token(token)
-            user = payload.get('sub') and {'phone': payload['sub'], 'role': payload.get('role', 'viewer')}
-        except Exception:
-            pass
-    if not user:
-        raise HTTPException(status_code=401, detail='Не авторизован')
-
+    """Скачать CSV. Авторизация отключена временно."""
     campaign = get_campaign(campaign_id)
     if not campaign:
         raise HTTPException(404, 'Кампания не найдена')
