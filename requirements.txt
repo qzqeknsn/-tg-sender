@@ -19,8 +19,8 @@ passlib==1.7.4
 pyaes==1.6.1
 pyasn1==0.6.3
 pycparser==3.0
-pydantic==2.6.1
-pydantic_core==2.16.2
+pydantic>=2.6
+pydantic_core>=2.18
 Pyrogram==2.0.106
 PySocks==1.7.1
 python-dotenv==1.0.0
