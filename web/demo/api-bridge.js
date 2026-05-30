@@ -1,6 +1,16 @@
 var API_BASE = window.location.origin;
 
-// Авторизация отключена
+// Редирект на логин если зашли снаружи (не после успешного входа)
+(function() {
+  if (window.location.pathname === '/' || window.location.pathname === '') {
+    var loggedIn = sessionStorage.getItem('logged_in');
+    if (!loggedIn) {
+      window.location.href = '/login';
+    } else {
+      sessionStorage.removeItem('logged_in');
+    }
+  }
+})();
 
 async function apiFetch(path, opts) {
   opts = opts || {};
@@ -302,6 +312,8 @@ window.api = {
   }
 
   function waitForStore() {
+    var token = localStorage.getItem('tg_sender_token');
+    if (!token) { window.location.href = '/login'; return; }
     if (!window.store || !window.store.setState) {
       setTimeout(waitForStore, 100);
       return;
