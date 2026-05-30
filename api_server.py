@@ -10,7 +10,7 @@ from typing import List, Optional
 from dotenv import load_dotenv
 load_dotenv(override=True)
 from fastapi import BackgroundTasks, Depends, FastAPI, HTTPException, Request, status
-from fastapi.responses import FileResponse, Response
+from fastapi.responses import Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.staticfiles import StaticFiles
@@ -610,7 +610,8 @@ def api_delete_user(phone: str, user=Depends(require_admin)):
 
 @app.get('/login')
 def login_page():
-    return FileResponse(os.path.join(WEB_DIR, 'login.html'))
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url='/')
 
 
 # Фронтенд: telegram-mass-sender/web/
