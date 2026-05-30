@@ -609,7 +609,8 @@ def api_delete_user(phone: str, user=Depends(require_admin)):
 
 @app.get('/login')
 def login_page():
-    return FileResponse(os.path.join(WEB_DIR, 'login.html'))
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url='/')
 
 
 # Фронтенд: telegram-mass-sender/web/
